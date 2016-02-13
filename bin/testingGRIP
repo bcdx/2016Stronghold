@@ -1,0 +1,37 @@
+import java.io.IOException;
+import IterativeRobot;
+import networktables.NetworkTable;
+
+public class MyRobot extends IterativeRobot {
+	NetworkTable table;
+	public Robot(){
+	 	 table = NetworkTable.getTable("GRIP/myContoursReport");
+	}
+	
+	public void roboInit(){
+	        double[] defaultValue = new double[0];
+	        while (true) {
+	            double[] areas = table.getNumberArray("area", defaultValue);
+	            System.out.print("areas:  ");
+	            for (double area : areas){
+	                System.out.print(area + " ");
+	            }
+	            System.out.println();
+	            Timer.delay(1);	
+ 			}
+    }
+    
+  /*  public void operatorControl(){
+    	double width = 0;
+    	double height = 0;
+    	while (isOperatorControl() && isEnabled()){
+    		Timer.delay(0.25);
+    		table.putNumber("Width", width);
+    		table.putNumber("Height", height);
+    		x += 0.05;
+    		y += 1.0;
+    	}
+    }
+    */
+    
+}
