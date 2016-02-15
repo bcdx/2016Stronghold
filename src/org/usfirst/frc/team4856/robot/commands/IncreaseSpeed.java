@@ -18,7 +18,7 @@ public class IncreaseSpeed extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.grabber.increase();	
+    	//Robot.grabber.increase();	
 
     }
 

@@ -3,6 +3,7 @@ package org.usfirst.frc.team4856.robot.subsystems;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -15,26 +16,23 @@ import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
  */
 public class DriveTrain extends Subsystem {
 	
+
 // Subsystem is the parent class of DriveTrain.
 // Though inheritance, DriveTrain inherits all the traits of the class Subsystem, and will have any new traits we assign to it.
 	
-	private SpeedController leftMotor, rightMotor ;
+	private SpeedController left1, left2, right1, right2 ;
 	private RobotDrive chassis;
+
 	//private Encoder testEnc;
 	
 	public DriveTrain () {
 		super();
+		left1 = new CANTalon(0);
+		left2 = new CANTalon (1);
+		right1 = new CANTalon (2);
+		right2 = new CANTalon (3);
 		
-		/*testEnc = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-		testEnc.setMaxPeriod(.2);
-		testEnc.setMinRate(10);
-		testEnc.setDistancePerPulse(5);
-		testEnc.setReverseDirection(true);
-		testEnc.setSamplesToAverage(7);*/
-		
-		leftMotor = new Talon (0);
-		rightMotor = new Talon (1);
-		chassis = new RobotDrive (leftMotor, rightMotor);
+		chassis = new RobotDrive (left1, left2, right1, right2);
 	}
 	
     
