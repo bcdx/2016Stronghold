@@ -18,7 +18,7 @@ public class BackwardShooter extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.close();	
+    	Robot.shooter.pickUp();	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,10 +27,7 @@ public class BackwardShooter extends Command {
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	return Robot.shooter.isFullyClosed();
-    }
-
+    
     // Called once after isFinished returns true
     protected void end() {
     	Robot.shooter.stop();
@@ -41,4 +38,10 @@ public class BackwardShooter extends Command {
     protected void interrupted() {
     	end();
     }
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

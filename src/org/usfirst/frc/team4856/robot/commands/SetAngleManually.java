@@ -1,17 +1,20 @@
-
 package org.usfirst.frc.team4856.robot.commands;
 
 import org.usfirst.frc.team4856.robot.Robot;
 
+
+import org.usfirst.frc.team4856.robot.subsystems.Shooter;
+
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ *
+ */
+public class SetAngleManually extends Command {
 
-public class TankDriveWithJoysticks extends Command {
-
-    public TankDriveWithJoysticks() {
+    public SetAngleManually() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	 requires(Robot.chassis);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +23,7 @@ public class TankDriveWithJoysticks extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.drive(Robot.oi.leftStick, Robot.oi.rightStick);
+    	Robot.shooter.setAngleManually(Robot.oi.shooterStick.getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,13 +33,10 @@ public class TankDriveWithJoysticks extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.chassis.drive(0, 0);
-    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

@@ -19,7 +19,7 @@ public class ForwardShooter extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.open();
+    	Robot.shooter.shoot();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,9 +28,7 @@ public class ForwardShooter extends Command {
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return Robot.shooter.isFullyOpen();
-    }
+   
 
     // Called once after isFinished returns true
     protected void end() {
@@ -43,4 +41,10 @@ public class ForwardShooter extends Command {
     protected void interrupted() {
     	end();
     }
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

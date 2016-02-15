@@ -27,24 +27,20 @@ public class OI {
 	//uses leftStick and rightStick for tank drive and elevatorStick to control the elevator
 	 public Joystick leftStick = new Joystick(0);
 	 public Joystick rightStick = new Joystick(1);
-	 public Joystick elevatorStick = new Joystick(2);
+	 public Joystick shooterStick = new Joystick(2);
 	
 	 
 	 //public OI() is a constructor of the OI class (defines/intializes the OI class)
 	public OI() {
 		
-	 JoystickButton close = new JoystickButton(elevatorStick,3);
-	 JoystickButton open = new JoystickButton(elevatorStick,4);
-	 //JoystickButton spikeOn = new JoystickButton(elevatorStick,5);
- 	 
-	 //JoystickButton Up = new JoystickButton(elevatorStick,3);
-	 //JoystickButton Down = new JoystickButton(elevatorStick,2);
-	 
+	 JoystickButton pickUp = new JoystickButton(shooterStick,3);
+	 JoystickButton shoot = new JoystickButton(shooterStick,4);
+	
 	 //(e.g. when the up button is held, the program runs the LiftElevator command)
 	// Up.whileHeld(new LiftElevator());
 	 //Down.whileHeld(new LowerElevator());
-	 close.whileHeld(new BackwardShooter());
-	 open.whileHeld(new ForwardShooter());
+	 pickUp.whileHeld(new BackwardShooter());
+	 shoot.whileHeld(new ForwardShooter());
 	 //spikeOn.whenPressed(new SpikeOn());
  
 	}
