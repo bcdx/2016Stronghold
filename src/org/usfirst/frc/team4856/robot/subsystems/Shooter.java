@@ -35,10 +35,10 @@ public class Shooter extends Subsystem {
 	
 	public Shooter () {
 		super();                                                                                                                                                                                      
-		shooterMotor = new Victor (4);//grabberMotor runs the grabber 
+		shooterMotor = new Victor (3);//grabberMotor runs the grabber 
 		insideContact = new DigitalInput(3);
 	    outsideContact = new DigitalInput(5);
-	    angleMotor = new Victor (3);
+	    angleMotor = new Victor (4);
 	    /*pot = new AnalogPotentiometer(0, 360, 30);
 	    AnalogInput ai = new AnalogInput(1);
 	    pot = new AnalogPotentiometer(ai, 360, 30);
@@ -71,13 +71,21 @@ public class Shooter extends Subsystem {
 	
     public void stop() {
     	shooterMotor.set(0);
-		//testTalon.set(0);
+    	angleMotor.set(0);
+		
 
     }
     
-    public void setAngleManually(double speed) {
+    public void setAngleManually(Joystick shooterStick){
+    	angleMotor.set(shooterStick.getY());
+    	
+    }
+    
+    /*public void setAngleManually(double speed) {
     	angleMotor.set(speed);
     }
+    */
+    
    /* public boolean isFullyClosed() {
     	//return false;
     	return !insideContact.get();

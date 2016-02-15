@@ -5,26 +5,31 @@ import org.usfirst.frc.team4856.robot.Robot;
 
 import org.usfirst.frc.team4856.robot.subsystems.Shooter;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class SetAngleManually extends Command {
+	
+	private Joystick shooter;
 
     public SetAngleManually() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	shooter = Robot.oi.shooterStick;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.setAngleManually(Robot.oi.shooterStick.getY());
+    	Robot.shooter.setAngleManually(shooter);
     }
+   
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
@@ -33,6 +38,7 @@ public class SetAngleManually extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.shooter.stop();
     }
 
     // Called when another command which requires one or more of the same
