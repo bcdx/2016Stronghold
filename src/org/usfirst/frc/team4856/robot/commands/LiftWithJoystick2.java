@@ -21,7 +21,7 @@ public class LiftWithJoystick2 extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.elevatorwithoutpot.lift(Robot.oi.elevatorStick.getY()*-0.85);
+    	Robot.elevatorwithoutpot.lift(Robot.oi.elevatorStick.getY()*-0.85);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -1,4 +1,5 @@
 package org.usfirst.frc.team4856.robot.subsystems;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -14,6 +15,9 @@ import org.usfirst.frc.team4856.robot.OI;
 import org.usfirst.frc.team4856.robot.commands.LiftWithJoystick2;
 
 
+/**
+ *
+ */
 public class ElevatorWithoutPot extends Subsystem {
 	//(e.g. lifter is a speed controller of type SpeedController)
 	private SpeedController lifter;

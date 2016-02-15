@@ -3,6 +3,7 @@ package org.usfirst.frc.team4856.robot.subsystems;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -19,9 +20,18 @@ public class DriveTrain extends Subsystem {
 	
 	private SpeedController leftMotor, rightMotor ;
 	private RobotDrive chassis;
+	//private Encoder testEnc;
 	
 	public DriveTrain () {
 		super();
+		
+		/*testEnc = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+		testEnc.setMaxPeriod(.2);
+		testEnc.setMinRate(10);
+		testEnc.setDistancePerPulse(5);
+		testEnc.setReverseDirection(true);
+		testEnc.setSamplesToAverage(7);*/
+		
 		leftMotor = new Talon (0);
 		rightMotor = new Talon (1);
 		chassis = new RobotDrive (leftMotor, rightMotor);
@@ -42,7 +52,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void drive(double left, double right) {
-		chassis.tankDrive(-0.85*left, -0.85*right); //tankDrive has already been defined in RobotDrive
+		chassis.tankDrive(0.8*left, 0.8*right); //tankDrive has already been defined in RobotDrive
 		
 //left and right are dummy variables that stand in for the values that we will define in the following section:
 	}

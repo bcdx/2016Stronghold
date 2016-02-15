@@ -1,5 +1,5 @@
 package org.usfirst.frc.team4856.robot;
-
+import edu.wpi.first.wpilibj.Relay;
 //import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 
+//import org.usfirst.frc.team4856.robot.commands.SpikeOn;
 
 import org.usfirst.frc.team4856.robot.commands.CloseGrabber;
 import org.usfirst.frc.team4856.robot.commands.LiftElevator;
@@ -14,10 +15,6 @@ import org.usfirst.frc.team4856.robot.commands.LowerElevator;
 import org.usfirst.frc.team4856.robot.commands.OpenGrabber;
 import org.usfirst.frc.team4856.robot.commands.SetElevatorSetpoint;
 import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
-import org.usfirst.frc.team4856.robot.commands.IncreaseSpeed;
-import org.usfirst.frc.team4856.robot.commands.DecreaseSpeed;
-import org.usfirst.frc.team4856.robot.commands.StopGrabber;
-
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -32,16 +29,15 @@ public class OI {
 	 public Joystick leftStick = new Joystick(0);
 	 public Joystick rightStick = new Joystick(1);
 	 public Joystick elevatorStick = new Joystick(2);
+	
 	 
 	 //public OI() is a constructor of the OI class (defines/intializes the OI class)
 	public OI() {
 		
 	 JoystickButton close = new JoystickButton(elevatorStick,3);
 	 JoystickButton open = new JoystickButton(elevatorStick,4);
-	 //JoystickButton accelerate = new JoystickButton(elevatorStick,5);
-	 //JoystickButton decelerate = new JoystickButton(elevatorStick,6);
-	 //JoystickButton stopButton = new JoystickButton(elevatorStick,8)
-	 //JoystickButton mysteryfunction =new JoystickButton(elevatorStick,7);
+	 //JoystickButton spikeOn = new JoystickButton(elevatorStick,5);
+ 	 
 	 //JoystickButton Up = new JoystickButton(elevatorStick,3);
 	 //JoystickButton Down = new JoystickButton(elevatorStick,2);
 	 
@@ -50,9 +46,8 @@ public class OI {
 	 //Down.whileHeld(new LowerElevator());
 	 close.whileHeld(new CloseGrabber());
 	 open.whileHeld(new OpenGrabber());
-	 //accelerate.whenPressed (new IncreaseSpeed());
-	 //decelerate.whenPressed(new DecreaseSpeed());
-	 //stopButton.whenPressed(new StopGrabber());
+	 //spikeOn.whenPressed(new SpikeOn());
+ 
 	}
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.

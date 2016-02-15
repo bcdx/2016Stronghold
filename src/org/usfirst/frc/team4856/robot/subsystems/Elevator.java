@@ -72,6 +72,4 @@ public class Elevator extends PIDSubsystem {
         lifter1.set(d);
     }
     
-    //added February 12 (AO, AT, OC)  below
-    
 }
