@@ -9,11 +9,10 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 //import org.usfirst.frc.team4856.robot.commands.SpikeOn;
 
-import org.usfirst.frc.team4856.robot.commands.CloseGrabber;
-import org.usfirst.frc.team4856.robot.commands.LiftElevator;
-import org.usfirst.frc.team4856.robot.commands.LowerElevator;
-import org.usfirst.frc.team4856.robot.commands.OpenGrabber;
-import org.usfirst.frc.team4856.robot.commands.SetElevatorSetpoint;
+import org.usfirst.frc.team4856.robot.commands.BackwardShooter;
+
+import org.usfirst.frc.team4856.robot.commands.ForwardShooter;
+
 import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -44,8 +43,8 @@ public class OI {
 	 //(e.g. when the up button is held, the program runs the LiftElevator command)
 	// Up.whileHeld(new LiftElevator());
 	 //Down.whileHeld(new LowerElevator());
-	 close.whileHeld(new CloseGrabber());
-	 open.whileHeld(new OpenGrabber());
+	 close.whileHeld(new BackwardShooter());
+	 open.whileHeld(new ForwardShooter());
 	 //spikeOn.whenPressed(new SpikeOn());
  
 	}

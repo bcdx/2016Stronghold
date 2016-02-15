@@ -12,12 +12,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
-import org.usfirst.frc.team4856.robot.commands.Autonomous;
+
 import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
 import org.usfirst.frc.team4856.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team4856.robot.subsystems.Elevator;
-import org.usfirst.frc.team4856.robot.subsystems.ElevatorWithoutPot;
-import org.usfirst.frc.team4856.robot.subsystems.Grabber;
+
+import org.usfirst.frc.team4856.robot.subsystems.Shooter;
 
 /**
  * The VM (virtual machine) is configured to automatically run this class, and to call the
@@ -33,9 +32,9 @@ public class Robot extends IterativeRobot {
 	 */
 	public static DriveTrain chassis;
 	public static OI oi;
-	public static Elevator elevator;
-	public static ElevatorWithoutPot elevatorwithoutpot;
-	public static Grabber grabber;
+	
+	
+	public static Shooter shooter;
 	public static Command autonomousCommand;
 
     /**
@@ -54,12 +53,11 @@ public class Robot extends IterativeRobot {
     
     @Override //newer GRIP code
     public void robotInit() {
-		elevator = new Elevator();
-		elevatorwithoutpot = new ElevatorWithoutPot();
+		
 		chassis = new DriveTrain();
-		grabber = new Grabber();
+		shooter = new Shooter();
 		oi = new OI();
-		autonomousCommand = new Autonomous(); }
+		 }
 		
 		/* //START of newer GRIP code:
 		try {
