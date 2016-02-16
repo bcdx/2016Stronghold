@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 //import org.usfirst.frc.team4856.robot.commands.SpikeOn;
 
 import org.usfirst.frc.team4856.robot.commands.BackwardShooter;
+import org.usfirst.frc.team4856.robot.commands.SetAngleManually;
 
 import org.usfirst.frc.team4856.robot.commands.ForwardShooter;
 
@@ -27,7 +28,7 @@ public class OI {
 	//uses leftStick and rightStick for tank drive and elevatorStick to control the elevator
 	 public Joystick leftStick = new Joystick(0);
 	 public Joystick rightStick = new Joystick(1);
-	 public Joystick shooterStick = new Joystick(2);
+	 public Joystick shooterStick = new Joystick(2); 
 	
 	 
 	 //public OI() is a constructor of the OI class (defines/intializes the OI class)
@@ -35,13 +36,14 @@ public class OI {
 		
 	 JoystickButton pickUp = new JoystickButton(shooterStick,3);
 	 JoystickButton shoot = new JoystickButton(shooterStick,4);
+	 JoystickButton moveShooter = new JoystickButton(shooterStick,5);
 	
 	 //(e.g. when the up button is held, the program runs the LiftElevator command)
 	// Up.whileHeld(new LiftElevator());
 	 //Down.whileHeld(new LowerElevator());
 	 pickUp.whileHeld(new BackwardShooter());
 	 shoot.whileHeld(new ForwardShooter());
-	 //spikeOn.whenPressed(new SpikeOn());
+	 moveShooter.whenPressed(new SetAngleManually());
  
 	}
     //// CREATING BUTTONS

@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class SetAngleManually extends Command {
 	
-	private Joystick shooter;
+	private Joystick shooterStick;
 
     public SetAngleManually() {
         // Use requires() here to declare subsystem dependencies
@@ -22,16 +22,16 @@ public class SetAngleManually extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	shooter = Robot.oi.shooterStick;
+    	shooterStick = Robot.oi.shooterStick;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.setAngleManually(shooter);
+    	Robot.shooter.setAngle(shooterStick);
     }
    
 
-    // Make this return true when this Command no longer needs to run execute()
+    // Make this return true when this Command no longer  needs to run execute()
     protected boolean isFinished() {
         return false;
     }

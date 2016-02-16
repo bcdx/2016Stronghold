@@ -23,7 +23,8 @@ import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
 /**
  *
  */
-public class Shooter extends PIDSubsystem {
+public class Shooter extends Subsystem {
+//public class Shooter extends PIDSubsystem {
 	private DigitalInput insideContact;
     private DigitalInput outsideContact;
   
@@ -35,6 +36,7 @@ public class Shooter extends PIDSubsystem {
 	
 	private SpeedController shooterMotor;
 	private SpeedController angleMotor;
+	/*
 	private static final double Kp = -2; //Kp = proportional (present error values), in response to diff between observed + setpoint
     private static final double Ki = 0.0; //Ki = integral(past error values), looks at past info + determines level to achieve stability
     private static final double Kd =0.0; //Kd = differential (future error values), looks at future outcome + adjusts rate of change to compensate
@@ -46,18 +48,20 @@ public class Shooter extends PIDSubsystem {
  // Though inheritance, DriveTrain inherits all the traits of the class Subsystem, and will have any new traits we assign to it.
      
      //private SpeedController grabberMotor;
-
+*/
 
 	
 	public Shooter () {
-		//super();
-		super("Shooter", Kp, Ki, Kd);
-        pot = new AnalogPotentiometer(0, 90, 0); //(0,270,-135) -135 < x < 135
+		super();
+		//super("Shooter", Kp, Ki, Kd);
+        /*
+		pot = new AnalogPotentiometer(0, 90, 0); //(0,270,-135) -135 < x < 135
         AnalogInput ai = new AnalogInput(1);
         pot = new AnalogPotentiometer(ai, 90, 0);
        
         setSetpoint(value);
         enable();
+        */
 		shooterMotor = new Victor (3);//grabberMotor runs the grabber 
 		insideContact = new DigitalInput(3);
 	    outsideContact = new DigitalInput(5);
@@ -85,6 +89,7 @@ public class Shooter extends PIDSubsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
+   /*
     protected double returnPIDInput() {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
@@ -97,6 +102,7 @@ public class Shooter extends PIDSubsystem {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
         }
+*/
 
     public void pickUp() {
     	shooterMotor.set(0.62);//picking up the ball - check whether speed should be positive or negative
@@ -114,8 +120,10 @@ public class Shooter extends PIDSubsystem {
 
     }
     
-    public void setAngleManually(Joystick shooterStick){
-    	angleMotor.set(shooterStick.getY());
+    public void setAngle (Joystick stick){
+    	double speed = stick.getY();
+    	angleMotor.set(speed);
+    	
     	
     }
     
