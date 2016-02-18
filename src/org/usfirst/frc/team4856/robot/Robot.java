@@ -64,12 +64,6 @@ public class Robot extends IterativeRobot {
     //private final NetworkTable grip = NetworkTable.getTable("grip"); //newer GRIP code
     
     @Override //newer GRIP code
-    public void robotInit() {
-		
-		//chassis = new DriveTrain();
-		shooter = new Shooter();
-		oi = new OI();
-		 }
 		
 		/* //START of newer GRIP code:
 		try {
@@ -132,6 +126,24 @@ public class Robot extends IterativeRobot {
 			
 		} //END of newer GRIP code
 		*/
+    }
+    
+    public void robotInit(){
+    	shooter = new Shooter();
+		oi = new OI ();
+		
+		double angle = 0;
+    	while (true){
+    		double width = 36.0;
+    		double distance = 0;
+    		
+    		distance = -0.000002*width*width*width*width+0.000277*width*width*width-0.011785*width*width-0.019093*width+10.0866;
+    		angle = 0.052*distance*distance*distance*distance-1.03*distance*distance*distance+8.49*distance*distance-37.29*distance+93.64;
+    		
+    		System.out.println("width: " + width);
+    		System.out.println("distance: " + distance);
+    		System.out.println("angle: " + angle);
+    	}
     }
 
     public void teleopInit() {

@@ -42,15 +42,19 @@ public class Shooter extends PIDSubsystem {
     private static final double Kd = 0.0; //Kd = differential (future error values), looks at future outcome + adjusts rate of change to compensate
     public static final double value = 3.5,
             value2 = 1.75; //set values?
-    AnalogPotentiometer pot = new AnalogPotentiometer(0, 360, 30); //not part of of la otra computadora
+    //AnalogPotentiometer pot = new AnalogPotentiometer(0, 360, 30); //not part of of la otra computadora
     
      //private SpeedController grabberMotor;
 
-    AnalogInput ai = new AnalogInput(1);
-    pot = new AnalogPotentiometer(ai, 90, 0);
+    private AnalogInput ai;
+    private AnalogPotentiometer pot;
 	
 	public Shooter () {
 		super("Shooter", Kp, Ki, Kd);
+		ai = new AnalogInput(1);
+		pot = new AnalogPotentiometer(ai, 90, 0);
+
+
         /*
 		pot = new AnalogPotentiometer(0, 90, 0); //(0,270,-135) -135 < x < 135
         
