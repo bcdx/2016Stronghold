@@ -2,41 +2,42 @@ package org.usfirst.frc.team4856.robot.commands;
 
 import org.usfirst.frc.team4856.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class SpinQuarter extends Command {
+public class Retract extends Command {
 
-    public SpinQuarter() {
+    public Retract() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.chassis);
-        setTimeout(0.5);
+        // eg. requires(chassis);
+    	//requires(Robot.scaler);
+    	//setTimeout(0.01);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	//Robot.scaler.retract();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.drive(-0.75,0.75); 
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.chassis.drive(0, 0);
+    	//Robot.scaler.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

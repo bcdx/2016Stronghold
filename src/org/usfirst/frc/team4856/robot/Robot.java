@@ -7,15 +7,16 @@ import edu.wpi.first.wpilibj.CANTalon;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.Joystick;
 
-
-import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
 import org.usfirst.frc.team4856.robot.subsystems.DriveTrain;
-
+import org.usfirst.frc.team4856.robot.subsystems.Pusher;
+//import org.usfirst.frc.team4856.robot.subsystems.Scaler;
 import org.usfirst.frc.team4856.robot.subsystems.Shooter;
 
 /**
@@ -35,8 +36,19 @@ public class Robot extends IterativeRobot {
 	
 	
 	public static Shooter shooter;
+	//public static Scaler scaler;
+	public static Pusher pusher;
 	public static Command autonomousCommand;
-
+	
+	CANTalon left1 = new CANTalon(0);
+	CANTalon left2 = new CANTalon (1);
+	CANTalon right1 = new CANTalon (2);
+	CANTalon right2 = new CANTalon (3);
+	//Victor scalerMotor = new Victor (5);
+	
+	Joystick leftStick = new Joystick(0);
+	Joystick rightStick = new Joystick(1);
+	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -54,7 +66,7 @@ public class Robot extends IterativeRobot {
     @Override //newer GRIP code
     public void robotInit() {
 		
-		chassis = new DriveTrain();
+		//chassis = new DriveTrain();
 		shooter = new Shooter();
 		oi = new OI();
 		 }
@@ -143,6 +155,18 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
+        double leftAxis = leftStick.getY();
+		left1.set(-1*leftAxis);
+		
+		left2.changeControlMode(CANTalon.TalonControlMode.Follower);
+		left2.set(left1.getDeviceID());
+		
+		double rightAxis = rightStick.getY();
+		right1.set(rightAxis);
+		
+		right2.changeControlMode(CANTalon.TalonControlMode.Follower);
+		right2.set(right1.getDeviceID());
          
     }
     

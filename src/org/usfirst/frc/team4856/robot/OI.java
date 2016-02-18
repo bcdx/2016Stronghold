@@ -10,11 +10,15 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 //import org.usfirst.frc.team4856.robot.commands.SpikeOn;
 
 import org.usfirst.frc.team4856.robot.commands.BackwardShooter;
+//import org.usfirst.frc.team4856.robot.commands.Extend;
 import org.usfirst.frc.team4856.robot.commands.SetAngleManually;
 
 import org.usfirst.frc.team4856.robot.commands.ForwardShooter;
+import org.usfirst.frc.team4856.robot.commands.Pull;
+import org.usfirst.frc.team4856.robot.commands.Push;
+import org.usfirst.frc.team4856.robot.commands.Retract;
 
-import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
+//import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -26,8 +30,8 @@ public class OI {
 	//declares variables of Joystick type (i.e. lefStick is an instance of Joystick.)
 	//0, 1, and 2 refer to USB ports
 	//uses leftStick and rightStick for tank drive and elevatorStick to control the elevator
-	 public Joystick leftStick = new Joystick(0);
-	 public Joystick rightStick = new Joystick(1);
+	 /*public Joystick leftStick = new Joystick(0);
+	 public Joystick rightStick = new Joystick(1);*/
 	 public Joystick shooterStick = new Joystick(2); 
 	
 	 
@@ -37,6 +41,9 @@ public class OI {
 	 JoystickButton pickUp = new JoystickButton(shooterStick,3);
 	 JoystickButton shoot = new JoystickButton(shooterStick,4);
 	 JoystickButton moveShooter = new JoystickButton(shooterStick,5);
+	 /*JoystickButton extend = new JoystickButton (shooterStick, 6);
+	 JoystickButton retract = new JoystickButton (shooterStick, 7);
+	 JoystickButton push = new JoystickButton (shooterStick, 8);*/
 	
 	 //(e.g. when the up button is held, the program runs the LiftElevator command)
 	// Up.whileHeld(new LiftElevator());
@@ -44,8 +51,13 @@ public class OI {
 	 pickUp.whileHeld(new BackwardShooter());
 	 shoot.whileHeld(new ForwardShooter());
 	 moveShooter.whenPressed(new SetAngleManually());
- 
+	 /*extend.whileHeld(new Extend());
+	 retract.whileHeld(new Retract());
+	 push.whenPressed(new Push());
+	 push.whenReleased(new Pull());*/
+	 
 	}
+	
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button

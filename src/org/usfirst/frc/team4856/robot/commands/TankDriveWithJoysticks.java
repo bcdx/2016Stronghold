@@ -1,5 +1,7 @@
 
-package org.usfirst.frc.team4856.robot.commands;
+//USELESS CAN DELETE
+
+/*package org.usfirst.frc.team4856.robot.commands;
 
 import org.usfirst.frc.team4856.robot.Robot;
 
@@ -11,7 +13,7 @@ public class TankDriveWithJoysticks extends Command {
     public TankDriveWithJoysticks() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	 requires(Robot.chassis);
+    	 //requires(Robot.chassis);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +22,7 @@ public class TankDriveWithJoysticks extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.drive(Robot.oi.leftStick, Robot.oi.rightStick);
+    	//Robot.chassis.drive(Robot.oi.leftStick, Robot.oi.rightStick);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,7 +32,7 @@ public class TankDriveWithJoysticks extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.chassis.drive(0, 0);
+    	//Robot.chassis.drive(0,0);
     	
     }
 
@@ -39,4 +41,4 @@ public class TankDriveWithJoysticks extends Command {
     protected void interrupted() {
     	end();
     }
-}
+}*/
