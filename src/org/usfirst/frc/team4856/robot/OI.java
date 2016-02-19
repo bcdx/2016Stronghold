@@ -39,10 +39,10 @@ public class OI {
 	public OI() {
 		
 	 JoystickButton pickUp = new JoystickButton(shooterStick,3);
-	 JoystickButton shoot = new JoystickButton(shooterStick,4);
-	 JoystickButton moveShooter = new JoystickButton(shooterStick,5);
-	 JoystickButton pushBall = new JoystickButton(shooterStick, 6);
-	 JoystickButton grabBall = new JoystickButton(shooterStick, 7);
+	 JoystickButton shoot = new JoystickButton(shooterStick,1);
+	 JoystickButton moveShooter = new JoystickButton(shooterStick,4);
+	 JoystickButton pushBall = new JoystickButton(shooterStick, 5);
+	 JoystickButton retreatPusher = new JoystickButton(shooterStick, 6);
 	 /*JoystickButton extend = new JoystickButton (shooterStick, 6);
 	 JoystickButton retract = new JoystickButton (shooterStick, 7);
 	 JoystickButton push = new JoystickButton (shooterStick, 8);*/
@@ -54,7 +54,7 @@ public class OI {
 	 shoot.whileHeld(new ForwardShooter());
 	 moveShooter.whenPressed(new SetAngleManually());
 	 pushBall.whileHeld(new Push());
-	 grabBall.whileHeld(new Pull());
+	 retreatPusher.whileHeld(new Pull());
 	 /*extend.whileHeld(new Extend());
 	 retract.whileHeld(new Retract());
 	 push.whenPressed(new Push());
