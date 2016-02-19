@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 import org.usfirst.frc.team4856.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4856.robot.subsystems.Pusher;
+import org.usfirst.frc.team4856.robot.subsystems.Scaler;
 //import org.usfirst.frc.team4856.robot.subsystems.Scaler;
 import org.usfirst.frc.team4856.robot.subsystems.Shooter;
 
@@ -31,12 +32,12 @@ public class Robot extends IterativeRobot {
 	/**
 	 * Declaration of variables. (e.g., chassis is an instance of DriveTrain)
 	 */
-	public static DriveTrain chassis;
 	public static OI oi;
-	
+	public static DriveTrain chassis;
+ 	
 	
 	public static Shooter shooter;
-	//public static Scaler scaler;
+	public static Scaler scaler;
 	public static Pusher pusher;
 	public static Command autonomousCommand;
 	
@@ -48,6 +49,7 @@ public class Robot extends IterativeRobot {
 	
 	Joystick leftStick = new Joystick(0);
 	Joystick rightStick = new Joystick(1);
+ 
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -132,7 +134,7 @@ public class Robot extends IterativeRobot {
     	shooter = new Shooter();
 		oi = new OI ();
 		
-		double angle = 0;
+		/* double angle = 0;
     	while (true){
     		double width = 36.0;
     		double distance = 0;
@@ -143,7 +145,7 @@ public class Robot extends IterativeRobot {
     		System.out.println("width: " + width);
     		System.out.println("distance: " + distance);
     		System.out.println("angle: " + angle);
-    	}
+    	} */
     }
 
     public void teleopInit() {

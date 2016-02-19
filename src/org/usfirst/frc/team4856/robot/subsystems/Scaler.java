@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 /**
  *
  */
-/*public class Scaler extends Subsystem {
+public class Scaler extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 		private SpeedController scalerMotor;
 		
-	/*public Scaler () {
+	public Scaler () {
 		super();                                                                                                                                                                                      
 		scalerMotor = new Victor (5);
 	}
@@ -37,6 +37,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-}*/
+}
 
 
