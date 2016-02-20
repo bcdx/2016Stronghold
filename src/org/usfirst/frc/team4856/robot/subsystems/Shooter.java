@@ -36,7 +36,7 @@ public class Shooter extends Subsystem {
 // Though inheritance, DriveTrain inherits all the traits of the class Subsystem, and will have any new traits we assign to it.
 	
 	private SpeedController shooterMotor;
-	private SpeedController angleMotor;
+//	private SpeedController angleMotor;
 	
 	//private static final double Kp = -2; //Kp = proportional (present error values), in response to diff between observed + setpoint
    // private static final double Ki = 0.0; //Ki = integral(past error values), looks at past info + determines level to achieve stability
@@ -65,13 +65,10 @@ public class Shooter extends Subsystem {
 
         */
 		shooterMotor = new Victor (3);//grabberMotor runs the grabber
-	    shooterMotor.set(-0.9);//shooting
-    	System.out.println("we shot in constructor");
-
 	    
 		insideContact = new DigitalInput(3);
 	    outsideContact = new DigitalInput(5);
-	    angleMotor = new Victor (4);
+	  //  angleMotor = new Victor (4);
      //   enable();
         
 	    /*pot = new AnalogPotentiometer(0, 360, 30);
@@ -114,45 +111,26 @@ public class Shooter extends Subsystem {
         }
 */
 
-    public void initialize(){
-    	shooterMotor = new Victor (3);//grabberMotor runs the grabber
-	    shooterMotor.set(-0.9);//shooting
-    	System.out.println("we shot in initialize");
-
-	    
-		insideContact = new DigitalInput(3);
-	    outsideContact = new DigitalInput(5);
-	    angleMotor = new Victor (4);
-       // enable();
-        
-	    /*pot = new AnalogPotentiometer(0, 360, 30);
-	    AnalogInput ai = new AnalogInput(1);
-	    pot = new AnalogPotentiometer(ai, 360, 30);
-	    double degrees = pot.get();*/
-	    
-        LiveWindow.addActuator("insideContact", "LimitSwitch", insideContact);
-        LiveWindow.addActuator("outsideContact", "LimitSwitch", outsideContact);
-    }
-    
+ 
     public void pickUp() {
     	shooterMotor.set(0.58);//picking up the ball - check whether speed should be positive or negative
     }
     
 	public void shoot() {
-    //	System.out.println("shoot command recognized");
+//    	System.out.println("shoot command recognized");
 	    shooterMotor.set(-0.9);//shooting
-    	System.out.println("we shot with the shoot button");
+    	System.out.println("shooter.shoot called, motor set.");
 	}
 	
 	
     public void stop() {
     	shooterMotor.set(0);
-    	angleMotor.set(0);
+    	//angleMotor.set(0);
     }
     
     public void setAngle (Joystick stick){
-    	double speed = stick.getY();
-    	angleMotor.set(speed);
+//    	double speed = stick.getY();
+    	//angleMotor.set(speed);
     }
     
 //    public void setAngle (double angle){

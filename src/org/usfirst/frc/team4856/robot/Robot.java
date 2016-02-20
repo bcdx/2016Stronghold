@@ -6,7 +6,9 @@ import edu.wpi.first.wpilibj.CANTalon;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -46,6 +48,7 @@ public class Robot extends IterativeRobot {
 
 	Joystick leftstick = new Joystick(0);
 	Joystick rightstick = new Joystick(1);
+	
 
 	public static Command autonomousCommand;
 
@@ -70,6 +73,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		//shooter.initialize();
     	//System.out.println("shooter created");
+		pusher = new Pusher();
 		oi = new OI();
  
 		 }
@@ -109,6 +113,8 @@ public class Robot extends IterativeRobot {
     /**
      * This function is called periodically during autonomous
      */
+	
+
     public void autonomousInit() {
         // schedule the autonomous command (example)
     	//if (the autonomousCommand does not return a null set (is not teleop), then run the autonomousCommand

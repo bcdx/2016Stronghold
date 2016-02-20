@@ -15,7 +15,7 @@ public class Pusher extends Subsystem {
 	
 	public Pusher () {
 		super();                                                                                                                                                                                      
-	//	pusherMotor = new Victor (6);
+		pusherMotor = new Victor (6);
 	}
 	
 	public void push() {
@@ -23,9 +23,9 @@ public class Pusher extends Subsystem {
 	   }
 	 
 		
-	   public void pull() {
-		   pusherMotor.set(-1);
-		}
+//	   public void pull() {
+//		   pusherMotor.set(-1);
+//		}
 	   
 	   public void stop() {
 	   		pusherMotor.set(0);
