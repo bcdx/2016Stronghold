@@ -20,64 +20,50 @@ import edu.wpi.first.wpilibj.Talon;
 
 import org.usfirst.frc.team4856.robot.Robot;
 //import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
+import org.usfirst.frc.team4856.robot.commands.SetAngleManually;
 
 /**
  *
  */
 public class Shooter extends Subsystem {
 //public class Shooter extends PIDSubsystem {
-	private DigitalInput insideContact;
-    private DigitalInput outsideContact;
+	//private DigitalInput insideContact;
+    //private DigitalInput outsideContact;
   
-    
-    
-
 // Subsystem is the parent class of DriveTrain.
 // Though inheritance, DriveTrain inherits all the traits of the class Subsystem, and will have any new traits we assign to it.
 	
 	private SpeedController shooterMotor;
-//	private SpeedController angleMotor;
+	private SpeedController angleMotor;
 	
-	//private static final double Kp = -2; //Kp = proportional (present error values), in response to diff between observed + setpoint
-   // private static final double Ki = 0.0; //Ki = integral(past error values), looks at past info + determines level to achieve stability
-   // private static final double Kd = 0.0; //Kd = differential (future error values), looks at future outcome + adjusts rate of change to compensate
-    //public static final double value = 3.5,
-           // value2 = 1.75; //set values?
-    //AnalogPotentiometer pot = new AnalogPotentiometer(0, 360, 30); //not part of of la otra computadora
+	private static final double Kp = -2; //Kp = proportional (present error values), in response to diff between observed + setpoint
+    private static final double Ki = 0.0; //Ki = integral(past error values), looks at past info + determines level to achieve stability
+    private static final double Kd = 0.0; //Kd = differential (future error values), looks at future outcome + adjusts rate of change to compensate
+    public static final double value = 3.5,
+    		value2 = 1.75; //set values?
+    private AnalogPotentiometer pot = new AnalogPotentiometer(0, 360, 30); //not part of of la otra computadora
     
-     //private SpeedController grabberMotor;
-
-   // private AnalogInput ai;
-    //private AnalogPotentiometer pot;
+    private AnalogInput ai;
 	
 	public Shooter () {
 		super();
-		 
-		//ai = new AnalogInput(1);
-		//pot = new AnalogPotentiometer(ai, 90, 0);
-
-
+		shooterMotor = new Victor (3);//grabberMotor runs the grabber
+	    angleMotor = new Victor (4);
+		ai = new AnalogInput(1);
+		pot = new AnalogPotentiometer(ai, 90, 0);
         /*
 		pot = new AnalogPotentiometer(0, 90, 0); //(0,270,-135) -135 < x < 135
-        
-       
-        setSetpoint(value);
+        		setSetpoint(value);
 
         */
-		shooterMotor = new Victor (3);//grabberMotor runs the grabber
-	    
-		insideContact = new DigitalInput(3);
-	    outsideContact = new DigitalInput(5);
-	  //  angleMotor = new Victor (4);
-     //   enable();
         
 	    /*pot = new AnalogPotentiometer(0, 360, 30);
 	    AnalogInput ai = new AnalogInput(1);
 	    pot = new AnalogPotentiometer(ai, 360, 30);
 	    double degrees = pot.get();*/
 	    
-        LiveWindow.addActuator("insideContact", "LimitSwitch", insideContact);
-        LiveWindow.addActuator("outsideContact", "LimitSwitch", outsideContact);
+       // LiveWindow.addActuator("insideContact", "LimitSwitch", insideContact);
+        //LiveWindow.addActuator("outsideContact", "LimitSwitch", outsideContact);
 	
        
 	}
@@ -85,7 +71,7 @@ public class Shooter extends Subsystem {
     // Put methods for controlling this subsystem here. Call these from Commands.
 
     public void initDefaultCommand() {
-    	//setDefaultCommand(new OpenGrabber());
+    	setDefaultCommand(new SetAngleManually());
   //when no other command is running, the default command is tankdrivewithjoystick. Consult the command TankDriveWithJoystick for more info.
 	 
     	//shooterMotor.set(-0.9);//shooting
@@ -125,12 +111,12 @@ public class Shooter extends Subsystem {
 	
     public void stop() {
     	shooterMotor.set(0);
-    	//angleMotor.set(0);
+    	angleMotor.set(0);
     }
     
     public void setAngle (Joystick stick){
-//    	double speed = stick.getY();
-    	//angleMotor.set(speed);
+    	double speed = stick.getY();
+    	angleMotor.set(speed);
     }
     
 //    public void setAngle (double angle){
