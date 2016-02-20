@@ -15,7 +15,7 @@ public class Pusher extends Subsystem {
 	
 	public Pusher () {
 		super();                                                                                                                                                                                      
-		pusherMotor = new Victor (6);
+	//	pusherMotor = new Victor (6);
 	}
 	
 	public void push() {

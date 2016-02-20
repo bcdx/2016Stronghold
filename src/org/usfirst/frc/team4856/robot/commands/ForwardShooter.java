@@ -19,6 +19,7 @@ public class ForwardShooter extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("start shoot");
     	Robot.shooter.shoot();
     }
 

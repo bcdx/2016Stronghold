@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team4856.robot;
 
 import java.io.IOException; //from newer GRIP code
@@ -6,19 +5,20 @@ import java.io.IOException; //from newer GRIP code
 import edu.wpi.first.wpilibj.CANTalon;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.Joystick;
 
+
+//import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
 import org.usfirst.frc.team4856.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team4856.robot.subsystems.Pusher;
-import org.usfirst.frc.team4856.robot.subsystems.Scaler;
-//import org.usfirst.frc.team4856.robot.subsystems.Scaler;
+
 import org.usfirst.frc.team4856.robot.subsystems.Shooter;
+
+import org.usfirst.frc.team4856.robot.subsystems.Pusher;
 
 /**
  * The VM (virtual machine) is configured to automatically run this class, and to call the
@@ -32,25 +32,23 @@ public class Robot extends IterativeRobot {
 	/**
 	 * Declaration of variables. (e.g., chassis is an instance of DriveTrain)
 	 */
-	public static OI oi;
 	public static DriveTrain chassis;
- 	
+	public static OI oi;
+	
 	
 	public static Shooter shooter;
-	public static Scaler scaler;
 	public static Pusher pusher;
+	
+	CANTalon left1= new CANTalon(0);
+	CANTalon left2= new CANTalon(1);
+	CANTalon right1= new CANTalon(2);
+	CANTalon right2= new CANTalon(3);
+
+	Joystick leftstick = new Joystick(0);
+	Joystick rightstick = new Joystick(1);
+
 	public static Command autonomousCommand;
-	
-	CANTalon left1 = new CANTalon(0);
-	CANTalon left2 = new CANTalon (1);
-	CANTalon right1 = new CANTalon (2);
-	CANTalon right2 = new CANTalon (3);
-	//Victor scalerMotor = new Victor (5);
-	
-	Joystick leftStick = new Joystick(0);
-	Joystick rightStick = new Joystick(1);
- 
-	
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -66,6 +64,15 @@ public class Robot extends IterativeRobot {
     //private final NetworkTable grip = NetworkTable.getTable("grip"); //newer GRIP code
     
     @Override //newer GRIP code
+    public void robotInit() {
+		
+		//chassis = new DriveTrain();
+		shooter = new Shooter();
+		//shooter.initialize();
+    	//System.out.println("shooter created");
+		oi = new OI();
+ 
+		 }
 		
 		/* //START of newer GRIP code:
 		try {
@@ -129,24 +136,6 @@ public class Robot extends IterativeRobot {
 		} //END of newer GRIP code
 		*/
     }
-    
-    public void robotInit(){
-    	shooter = new Shooter();
-		oi = new OI ();
-		
-		/* double angle = 0;
-    	while (true){
-    		double width = 36.0;
-    		double distance = 0;
-    		
-    		distance = -0.000002*width*width*width*width+0.000277*width*width*width-0.011785*width*width-0.019093*width+10.0866;
-    		angle = 0.052*distance*distance*distance*distance-1.03*distance*distance*distance+8.49*distance*distance-37.29*distance+93.64;
-    		
-    		System.out.println("width: " + width);
-    		System.out.println("distance: " + distance);
-    		System.out.println("angle: " + angle);
-    	} */
-    }
 
     public void teleopInit() {
 		// This makes sure that the autonomous stops running when
@@ -154,6 +143,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
        //autonomousCommand.cancel();
+
     }
 
     /**
@@ -169,19 +159,14 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        
-        double leftAxis = leftStick.getY();
-		left1.set(-1*leftAxis);
-		
-		left2.changeControlMode(CANTalon.TalonControlMode.Follower);
-		left2.set(left1.getDeviceID());
-		
-		double rightAxis = rightStick.getY();
-		right1.set(rightAxis);
-		
-		right2.changeControlMode(CANTalon.TalonControlMode.Follower);
-		right2.set(right1.getDeviceID());
-         
+        double leftAxis = leftstick.getY();
+        left1.set(-1*leftAxis);
+        left2.changeControlMode(CANTalon.TalonControlMode.Follower);
+        left2.set(left1.getDeviceID());
+        double rightAxis = rightstick.getY();
+        right1.set(-1*rightAxis);
+        right2.changeControlMode(CANTalon.TalonControlMode.Follower);
+        right2.set(right1.getDeviceID());         
     }
     
     /**
@@ -191,3 +176,4 @@ public class Robot extends IterativeRobot {
         LiveWindow.run();
     }
 }
+
