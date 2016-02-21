@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 
 //import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
-import org.usfirst.frc.team4856.robot.subsystems.DriveTrain;
 
 import org.usfirst.frc.team4856.robot.subsystems.Shooter;
 
@@ -34,10 +33,7 @@ public class Robot extends IterativeRobot {
 	/**
 	 * Declaration of variables. (e.g., chassis is an instance of DriveTrain)
 	 */
-	public static DriveTrain chassis;
 	public static OI oi;
-	
-	
 	public static Shooter shooter;
 	public static Pusher pusher;
 	
@@ -68,14 +64,9 @@ public class Robot extends IterativeRobot {
     
     @Override //newer GRIP code
     public void robotInit() {
-		
-		//chassis = new DriveTrain();
 		shooter = new Shooter();
-		//shooter.initialize();
-    	//System.out.println("shooter created");
 		pusher = new Pusher();
 		oi = new OI();
- 
 		 }
 		
 		/* //START of newer GRIP code:
@@ -170,7 +161,7 @@ public class Robot extends IterativeRobot {
         left2.changeControlMode(CANTalon.TalonControlMode.Follower);
         left2.set(left1.getDeviceID());
         double rightAxis = rightstick.getY();
-        right1.set(-1*rightAxis);
+        right1.set(1*rightAxis);
         right2.changeControlMode(CANTalon.TalonControlMode.Follower);
         right2.set(right1.getDeviceID());         
     }

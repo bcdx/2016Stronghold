@@ -26,15 +26,12 @@ import org.usfirst.frc.team4856.robot.commands.SetAngleManually;
  *
  */
 public class Shooter extends Subsystem {
-//public class Shooter extends PIDSubsystem {
-	//private DigitalInput insideContact;
-    //private DigitalInput outsideContact;
-  
-// Subsystem is the parent class of DriveTrain.
-// Though inheritance, DriveTrain inherits all the traits of the class Subsystem, and will have any new traits we assign to it.
-	
+//public class Shooter extends PIDSubsystem { 
+  	
 	private SpeedController shooterMotor;
 	private SpeedController angleMotor;
+	private DigitalInput topContact;
+	private DigitalInput bottomContact;
 	
 	private static final double Kp = -2; //Kp = proportional (present error values), in response to diff between observed + setpoint
     private static final double Ki = 0.0; //Ki = integral(past error values), looks at past info + determines level to achieve stability
@@ -51,6 +48,16 @@ public class Shooter extends Subsystem {
 	    angleMotor = new Victor (4);
 		ai = new AnalogInput(1);
 		pot = new AnalogPotentiometer(ai, 90, 0);
+	    double degrees = pot.get();
+	    
+	    /*Limit Switch init code*/
+	    
+	    //topContact = new DigitalInput(1);
+	    bottomContact = new DigitalInput(2);
+	    //LiveWindow.addActuator("bottomContact", "LimitSwitch", bottomContact);
+        //LiveWindow.addActuator("topContact", "LimitSwitch", topContact);
+		//setSetpoint(value);
+
         /*
 		pot = new AnalogPotentiometer(0, 90, 0); //(0,270,-135) -135 < x < 135
         		setSetpoint(value);
@@ -60,12 +67,8 @@ public class Shooter extends Subsystem {
 	    /*pot = new AnalogPotentiometer(0, 360, 30);
 	    AnalogInput ai = new AnalogInput(1);
 	    pot = new AnalogPotentiometer(ai, 360, 30);
-	    double degrees = pot.get();*/
-	    
-       // LiveWindow.addActuator("insideContact", "LimitSwitch", insideContact);
-        //LiveWindow.addActuator("outsideContact", "LimitSwitch", outsideContact);
-	
-       
+	    */
+      
 	}
     
     // Put methods for controlling this subsystem here. Call these from Commands.
@@ -99,29 +102,43 @@ public class Shooter extends Subsystem {
 
  
     public void pickUp() {
-    	shooterMotor.set(0.58);//picking up the ball - check whether speed should be positive or negative
+    	shooterMotor.set(-0.62);//picking up the ball - check whether speed should be positive or negative
     }
     
 	public void shoot() {
-//    	System.out.println("shoot command recognized");
-	    shooterMotor.set(-0.9);//shooting
-    	System.out.println("shooter.shoot called, motor set.");
-	}
+ 	    shooterMotor.set(0.99);//shooting
+ 	}
 	
 	
     public void stop() {
     	shooterMotor.set(0);
+//    	angleMotor.set(0);
+    }
+    
+    public void stopAngle() { //separated from stop (Sunday CR AO)
     	angleMotor.set(0);
     }
-    
-    public void setAngle (Joystick stick){
+  //added if statement for limit switches in setAngle class and 
+  //added two classes (isAtTop and isAtBottom) (Sunday CR AO)
+    public void setAngle (Joystick stick){ 
     	double speed = stick.getY();
-    	angleMotor.set(speed);
+    	//angleMotor.set(speed);
+    	if (speed < 0 && isAtBottom()){
+    		stopAngle();
+    	}
+    	
+    	else {
+    		angleMotor.set(speed);
+    	}
+    }
+   
+    
+    public boolean isAtBottom() {
+    	//return false;
+    	return !bottomContact.get();
     }
     
-//    public void setAngle (double angle){
-//    	setSetpoint(angle);
-//    }
+
 //    
 //    protected double returnPIDInput() {
 //    	// return your input value for the PID loop
@@ -137,10 +154,7 @@ public class Shooter extends Subsystem {
 //    	angleMotor.set(output);
 //    }
     
-    /*public void setAngleManually(double speed) {
-    	angleMotor.set(speed);
-    }
-    */
+     
     
    /* public boolean isFullyClosed() {
     	//return false;

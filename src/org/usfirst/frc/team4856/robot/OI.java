@@ -29,27 +29,22 @@ public class OI {
 	//declares variables of Joystick type (i.e. lefStick is an instance of Joystick.)
 	//0, 1, and 2 refer to USB ports
 	//uses leftStick and rightStick for tank drive and elevatorStick to control the elevator
-//	 public Joystick leftStick = new Joystick(0);
-//	 public Joystick rightStick = new Joystick(1);
+	// public Joystick leftStick = new Joystick(0);
+	// public Joystick rightStick = new Joystick(1);
 	 public Joystick shooterStick = new Joystick(2); 
 
 	 //public OI() is a constructor of the OI class (defines/intializes the OI class)
 	public OI() {
 	 JoystickButton pickUp = new JoystickButton(shooterStick,3);
 	 JoystickButton shoot = new JoystickButton(shooterStick,4);
-	// JoystickButton moveShooter = new JoystickButton(shooterStick,5);
 	 JoystickButton push = new JoystickButton (shooterStick, 6);
-	// JoystickButton pull = new JoystickButton (shooterStick, 7);
 
 //	 JoystickButton pushBall = new JoystickButton(shooterStick, 5);
 	// JoystickButton retreatPusher = new JoystickButton(shooterStick, 6);
 	 //JoystickButton extend = new JoystickButton (shooterStick, 6);
-	 //JoystickButton retract = new JoystickButton (shooterStick, 7);
-	 
+	 //JoystickButton retract = new JoystickButton (shooterStick, 7); 
 	
 	 //(e.g. when the up button is held, the program runs the LiftElevator command)
-	// Up.whileHeld(new LiftElevator());
-	 //Down.whileHeld(new LowerElevator());
 	 pickUp.whileHeld(new BackwardShooter());
 	 shoot.whileHeld(new ForwardShooter());
 	// moveShooter.whenPressed(new SetAngleManually());
