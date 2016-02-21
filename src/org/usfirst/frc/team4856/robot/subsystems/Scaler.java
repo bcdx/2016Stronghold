@@ -18,6 +18,7 @@ public class Scaler extends Subsystem {
 	public Scaler () {
 		super();                                                                                                                                                                                      
 		scalerMotor = new Victor (5);
+		
 	}
 	
    public void extend() {

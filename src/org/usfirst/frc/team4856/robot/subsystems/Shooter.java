@@ -38,7 +38,7 @@ public class Shooter extends Subsystem {
     private static final double Kd = 0.0; //Kd = differential (future error values), looks at future outcome + adjusts rate of change to compensate
     public static final double value = 3.5,
     		value2 = 1.75; //set values?
-    private AnalogPotentiometer pot = new AnalogPotentiometer(0, 360, 30); //not part of of la otra computadora
+    public AnalogPotentiometer pot = new AnalogPotentiometer(0, 360, 30); //not part of of la otra computadora
     
     private AnalogInput ai;
 	
@@ -52,7 +52,6 @@ public class Shooter extends Subsystem {
 	    
 	    /*Limit Switch init code*/
 	    
-	    //topContact = new DigitalInput(1);
 	    bottomContact = new DigitalInput(2);
 	    //LiveWindow.addActuator("bottomContact", "LimitSwitch", bottomContact);
         //LiveWindow.addActuator("topContact", "LimitSwitch", topContact);
@@ -97,9 +96,10 @@ public class Shooter extends Subsystem {
         protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
+        	angleMotor.set(output);
         }
-*/
 
+*/
  
     public void pickUp() {
     	shooterMotor.set(-0.62);//picking up the ball - check whether speed should be positive or negative

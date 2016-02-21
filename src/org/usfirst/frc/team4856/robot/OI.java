@@ -15,7 +15,8 @@ import org.usfirst.frc.team4856.robot.commands.SetAngleManually;
 
 import org.usfirst.frc.team4856.robot.commands.ForwardShooter;
 import org.usfirst.frc.team4856.robot.commands.Push;
-import org.usfirst.frc.team4856.robot.commands.Retract;
+import org.usfirst.frc.team4856.robot.commands.ScaleUp;
+import org.usfirst.frc.team4856.robot.commands.ScaleDown ;
 
 //import org.usfirst.frc.team4856.robot.commands.TankDriveWithJoysticks;
 
@@ -37,8 +38,10 @@ public class OI {
 	public OI() {
 	 JoystickButton pickUp = new JoystickButton(shooterStick,3);
 	 JoystickButton shoot = new JoystickButton(shooterStick,4);
-	 JoystickButton push = new JoystickButton (shooterStick, 6);
-
+	 JoystickButton push = new JoystickButton (shooterStick, 2);
+	 JoystickButton scaleUp = new JoystickButton(shooterStick,5);
+	 JoystickButton scaleDown = new JoystickButton (shooterStick, 6);
+	 
 //	 JoystickButton pushBall = new JoystickButton(shooterStick, 5);
 	// JoystickButton retreatPusher = new JoystickButton(shooterStick, 6);
 	 //JoystickButton extend = new JoystickButton (shooterStick, 6);
@@ -49,6 +52,8 @@ public class OI {
 	 shoot.whileHeld(new ForwardShooter());
 	// moveShooter.whenPressed(new SetAngleManually());
 	 push.whileHeld(new Push());
+	 scaleUp.whileHeld(new ScaleUp());
+	 scaleDown.whileHeld(new ScaleDown());
 //	 retreatPusher.whileHeld(new Pull());
 	 /*extend.whileHeld(new Extend());
 	 retract.whileHeld(new Retract());
