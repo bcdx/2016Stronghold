@@ -2,12 +2,14 @@ package org.usfirst.frc.team4856.robot.commands;
 
 import org.usfirst.frc.team4856.robot.Robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class ScaleDown extends Command {
+	private Joystick shooterstick;
 
     public ScaleDown() {
         // Use requires() here to declare subsystem dependencies

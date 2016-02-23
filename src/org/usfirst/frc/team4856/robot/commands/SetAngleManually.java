@@ -28,7 +28,7 @@ public class SetAngleManually extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.shooter.setAngle(shooterStick);
-    	//System.out.println("pot reading:" + Robot.shooter.pot.get());
+    	//System.out.println("pot reading:" + -1*Robot.shooter.pot.get());
     }
    
 

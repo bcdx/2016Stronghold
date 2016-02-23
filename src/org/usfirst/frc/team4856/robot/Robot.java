@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 import org.usfirst.frc.team4856.robot.subsystems.Shooter;
 import org.usfirst.frc.team4856.robot.subsystems.Scaler;
+import org.usfirst.frc.team4856.robot.commands.AutonomousMode;
 import org.usfirst.frc.team4856.robot.subsystems.Pusher;
 
 /**
@@ -33,6 +34,8 @@ public class Robot extends IterativeRobot {
 	/**
 	 * Declaration of variables. (e.g., chassis is an instance of DriveTrain)
 	 */
+	NetworkTable table;
+
 	public static OI oi;
 	public static Shooter shooter;
 	public static Pusher pusher;
@@ -45,7 +48,8 @@ public class Robot extends IterativeRobot {
 
 	Joystick leftstick = new Joystick(0);
 	Joystick rightstick = new Joystick(1);
-	
+	double angle = 0;
+
 
 	public static Command autonomousCommand;
 
@@ -54,50 +58,42 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     
-    // instantiate the command used for the autonomous period
-    //autonomousCommand = new ExampleCommand();
-	//oi MUST be last so the program knows where to look for the correct methods
-   // public Robot (){
-    	//table = NetworkTable.getTable("GRIP/myContoursReport");
-    //} //older GRIP code
+    public Robot (){
+    	table=NetworkTable.getTable("Root/GRIP/myContoursReport");
+    	
+    }
     
-    //private final NetworkTable grip = NetworkTable.getTable("grip"); //newer GRIP code
     
-    @Override //newer GRIP code
     public void robotInit() {
 		shooter = new Shooter();
 		pusher = new Pusher();
 		scaler = new Scaler();
 		oi = new OI();
-		 }
-		
-		/* //START of newer GRIP code:
-		try {
-			new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} */ //END of newer GRIP code
-		
-		//START of older GRIP code:
-		/*double[] defaultValue = new double[0];
-		double angle = 0;
-		while (true) {
+		autonomousCommand = new AutonomousMode(); 
+		double[] defaultValue = new double[0];
+//		while (true) {
+//			
+		System.out.println("starting robotInit");
 			double[] widths = table.getNumberArray("width", defaultValue);
+			System.out.println("width table created" + widths.length);
 			for (double width : widths) {
-				double distance = -0.000002*width*width*width*width+0.000277*width*width*width-0.011785*width*width-0.019093*width+10.0866;
-				//converting from pixels to meters
-				angle = 0.052*distance*distance*distance*distance-1.03*distance*distance*distance+8.49*distance*distance-37.29*distance+93.64;
-				//find angle from distance (using regression if v0 = 30)
+				System.out.println("width: "+ widths);
 			}
-			System.out.print("widths: ");
-			for (double width : widths) {
-				System.out.print(width + " ");
-			}
-			System.out.print(angle);
-			System.out.println();
-			Timer.delay(1);
-		} //END of older GRIP code
-    }
+//				double distance = -0.000002*width*width*width*width+0.000277*width*width*width-0.011785*width*width-0.019093*width+10.0866;
+//				//converting from pixels to meters
+//				angle = 0.052*distance*distance*distance*distance-1.03*distance*distance*distance+8.49*distance*distance-37.29*distance+93.64;
+////				//find angle from distance (using regression if v0 = 30)
+//				System.out.println("width: "+ width);
+//				System.out.println("distance: "+ distance);
+//				System.out.println("angle: "+ angle);
+//////			}
+////			
+////			Timer.delay(1);
+//		} //END of older GRIP code
+}
+			
+		
+		
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
@@ -141,7 +137,7 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-       //autonomousCommand.cancel();
+       autonomousCommand.cancel();
 
     }
 
@@ -165,7 +161,7 @@ public class Robot extends IterativeRobot {
         double rightAxis = rightstick.getY();
         right1.set(1*rightAxis);
         right2.changeControlMode(CANTalon.TalonControlMode.Follower);
-        right2.set(right1.getDeviceID());         
+        right2.set(right1.getDeviceID());
     }
     
     /**

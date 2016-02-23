@@ -3,9 +3,13 @@ package org.usfirst.frc.team4856.robot.subsystems;
 
 //import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import java.io.IOException;
+
 //import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team4856.robot.*;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -32,13 +36,14 @@ public class Shooter extends Subsystem {
 	private SpeedController angleMotor;
 	private DigitalInput topContact;
 	private DigitalInput bottomContact;
-	
+	public final NetworkTable grip = NetworkTable.getTable("grip");
+
 	private static final double Kp = -2; //Kp = proportional (present error values), in response to diff between observed + setpoint
     private static final double Ki = 0.0; //Ki = integral(past error values), looks at past info + determines level to achieve stability
     private static final double Kd = 0.0; //Kd = differential (future error values), looks at future outcome + adjusts rate of change to compensate
     public static final double value = 3.5,
     		value2 = 1.75; //set values?
-    public AnalogPotentiometer pot = new AnalogPotentiometer(0, 360, 30); //not part of of la otra computadora
+    public AnalogPotentiometer pot;
     
     private AnalogInput ai;
 	
@@ -47,8 +52,9 @@ public class Shooter extends Subsystem {
 		shooterMotor = new Victor (3);//grabberMotor runs the grabber
 	    angleMotor = new Victor (4);
 		ai = new AnalogInput(1);
-		pot = new AnalogPotentiometer(ai, 90, 0);
+		pot = new AnalogPotentiometer(ai, 339.8, -212.2);
 	    double degrees = pot.get();
+	    //double test = pot.pidGet();
 	    
 	    /*Limit Switch init code*/
 	    
@@ -77,7 +83,6 @@ public class Shooter extends Subsystem {
   //when no other command is running, the default command is tankdrivewithjoystick. Consult the command TankDriveWithJoystick for more info.
 	 
     	//shooterMotor.set(-0.9);//shooting
-    	//System.out.println("initi default shot");
     	
     	
         // Set the default command for a subsystem here.
@@ -102,13 +107,26 @@ public class Shooter extends Subsystem {
 */
  
     public void pickUp() {
-    	shooterMotor.set(-0.62);//picking up the ball - check whether speed should be positive or negative
+    	shooterMotor.set(0.6);//picking up the ball - check whether speed should be positive or negative
     }
     
 	public void shoot() {
- 	    shooterMotor.set(0.99);//shooting
+ 	    shooterMotor.set(-0.99);//shooting
  	}
 	
+	public void runGRIP(){
+	        /* Run GRIP in a new process */
+	        try {
+	            new ProcessBuilder("/home/robotics2/grip").inheritIO().start();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	    	for (double width : grip.getNumberArray("targets/width", new double[0])) {
+	            System.out.println("Got contour with width=" + width);
+	        }
+	    
+	}
 	
     public void stop() {
     	shooterMotor.set(0);

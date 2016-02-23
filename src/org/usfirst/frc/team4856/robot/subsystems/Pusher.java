@@ -19,7 +19,7 @@ public class Pusher extends Subsystem {
 	}
 	
 	public void push() {
-		   pusherMotor.set(-1);
+		   pusherMotor.set(1);
 	   }
 	 
 		

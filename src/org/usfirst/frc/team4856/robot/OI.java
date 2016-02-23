@@ -15,6 +15,7 @@ import org.usfirst.frc.team4856.robot.commands.SetAngleManually;
 
 import org.usfirst.frc.team4856.robot.commands.ForwardShooter;
 import org.usfirst.frc.team4856.robot.commands.Push;
+import org.usfirst.frc.team4856.robot.commands.PushandShoot;
 import org.usfirst.frc.team4856.robot.commands.ScaleUp;
 import org.usfirst.frc.team4856.robot.commands.ScaleDown ;
 
@@ -37,8 +38,9 @@ public class OI {
 	 //public OI() is a constructor of the OI class (defines/intializes the OI class)
 	public OI() {
 	 JoystickButton pickUp = new JoystickButton(shooterStick,3);
-	 JoystickButton shoot = new JoystickButton(shooterStick,4);
-	 JoystickButton push = new JoystickButton (shooterStick, 2);
+// JoystickButton shoot = new JoystickButton(shooterStick,4);
+	// JoystickButton push = new JoystickButton (shooterStick, 2);
+	 JoystickButton shootPush = new JoystickButton (shooterStick,4);
 	 JoystickButton scaleUp = new JoystickButton(shooterStick,5);
 	 JoystickButton scaleDown = new JoystickButton (shooterStick, 6);
 	 
@@ -49,9 +51,8 @@ public class OI {
 	
 	 //(e.g. when the up button is held, the program runs the LiftElevator command)
 	 pickUp.whileHeld(new BackwardShooter());
-	 shoot.whileHeld(new ForwardShooter());
 	// moveShooter.whenPressed(new SetAngleManually());
-	 push.whileHeld(new Push());
+	 shootPush.whenPressed(new PushandShoot());
 	 scaleUp.whileHeld(new ScaleUp());
 	 scaleDown.whileHeld(new ScaleDown());
 //	 retreatPusher.whileHeld(new Pull());
