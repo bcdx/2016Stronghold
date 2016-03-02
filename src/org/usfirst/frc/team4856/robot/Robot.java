@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 	/**
 	 * Declaration of variables. (e.g., chassis is an instance of DriveTrain)
 	 */
-	NetworkTable table;
+	public NetworkTable table;
 
 	public static OI oi;
 	public static Shooter shooter;
@@ -71,25 +71,25 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		autonomousCommand = new AutonomousMode(); 
 		double[] defaultValue = new double[0];
-//		while (true) {
-//			
+////		while (true) {
+////			
 		System.out.println("starting robotInit");
 			double[] widths = table.getNumberArray("width", defaultValue);
 			System.out.println("width table created" + widths.length);
-			for (double width : widths) {
-				System.out.println("width: "+ widths);
-			}
-//				double distance = -0.000002*width*width*width*width+0.000277*width*width*width-0.011785*width*width-0.019093*width+10.0866;
-//				//converting from pixels to meters
-//				angle = 0.052*distance*distance*distance*distance-1.03*distance*distance*distance+8.49*distance*distance-37.29*distance+93.64;
-////				//find angle from distance (using regression if v0 = 30)
+//			for (double width : widths) {
 //				System.out.println("width: "+ width);
-//				System.out.println("distance: "+ distance);
-//				System.out.println("angle: "+ angle);
-//////			}
-////			
-////			Timer.delay(1);
-//		} //END of older GRIP code
+//			}
+////				double distance = -0.000002*width*width*width*width+0.000277*width*width*width-0.011785*width*width-0.019093*width+10.0866;
+////				//converting from pixels to meters
+////				angle = 0.052*distance*distance*distance*distance-1.03*distance*distance*distance+8.49*distance*distance-37.29*distance+93.64;
+//////				//find angle from distance (using regression if v0 = 30)
+////				System.out.println("width: "+ width);
+////				System.out.println("distance: "+ distance);
+////				System.out.println("angle: "+ angle);
+////////			}
+//////			
+//////			Timer.delay(1);
+////		} //END of older GRIP code
 }
 			
 		

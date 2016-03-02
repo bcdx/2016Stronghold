@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 /**
  *
  */
-public class AutonomousMode extends Command {
+public class AutonomousMode extends CommandGroup {
 
 	
 	CANTalon left1= new CANTalon(0);
@@ -26,18 +26,21 @@ public class AutonomousMode extends Command {
 //    	 long t= System.currentTimeMillis();
 //    	 long end = t+5000;
 //    	 while(System.currentTimeMillis() < end){
-    		 left1.set(0.5);
+    		 left1.set(0.45);
              left2.changeControlMode(CANTalon.TalonControlMode.Follower);
              left2.set(left1.getDeviceID());
              right1.set(-0.5);
              right2.changeControlMode(CANTalon.TalonControlMode.Follower);
              right2.set(right1.getDeviceID()); 
 //    	 	}   
-             Timer.delay(3);
+             
+             left1.setSafetyEnabled(true); //hopefully will stop motors after 3 sec 2/26 AT
+             right1.setSafetyEnabled(true);
+             left1.setExpiration(3.0);
              left1.set(0);
-             left2.set(0);
+             right1.setExpiration(3.0);
              right1.set(0);
-             right2.set(0);
+           
 
 }
     	 

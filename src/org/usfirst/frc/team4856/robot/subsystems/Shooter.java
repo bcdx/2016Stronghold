@@ -29,8 +29,8 @@ import org.usfirst.frc.team4856.robot.commands.SetAngleManually;
 /**
  *
  */
-public class Shooter extends Subsystem {
-//public class Shooter extends PIDSubsystem { 
+//public class Shooter extends Subsystem {
+public class Shooter extends PIDSubsystem { 
   	
 	private SpeedController shooterMotor;
 	private SpeedController angleMotor;
@@ -46,13 +46,14 @@ public class Shooter extends Subsystem {
     public AnalogPotentiometer pot;
     
     private AnalogInput ai;
+    public boolean enabledPID = false;
 	
 	public Shooter () {
-		super();
+		super("Shooter", Kp, Ki, Kd);
 		shooterMotor = new Victor (3);//grabberMotor runs the grabber
 	    angleMotor = new Victor (4);
 		ai = new AnalogInput(1);
-		pot = new AnalogPotentiometer(ai, 339.8, -212.2);
+		pot = new AnalogPotentiometer(ai, 265.4, -161.1);
 	    double degrees = pot.get();
 	    //double test = pot.pidGet();
 	    
@@ -81,7 +82,7 @@ public class Shooter extends Subsystem {
     public void initDefaultCommand() {
     	setDefaultCommand(new SetAngleManually());
   //when no other command is running, the default command is tankdrivewithjoystick. Consult the command TankDriveWithJoystick for more info.
-	 
+//	 System.out.println("init default command ran");
     	//shooterMotor.set(-0.9);//shooting
     	
     	
@@ -89,22 +90,25 @@ public class Shooter extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-   /*
+   
     protected double returnPIDInput() {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-        double degrees = pot.get();
+        double degrees = -1 * pot.get();
         return degrees;
         }
 
         protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-        	angleMotor.set(output);
+        	if (enabledPID){
+            	angleMotor.set(output);
+
+        	}
         }
 
-*/
+
  
     public void pickUp() {
     	shooterMotor.set(0.6);//picking up the ball - check whether speed should be positive or negative
@@ -114,19 +118,19 @@ public class Shooter extends Subsystem {
  	    shooterMotor.set(-0.99);//shooting
  	}
 	
-	public void runGRIP(){
-	        /* Run GRIP in a new process */
-	        try {
-	            new ProcessBuilder("/home/robotics2/grip").inheritIO().start();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-
-	    	for (double width : grip.getNumberArray("targets/width", new double[0])) {
-	            System.out.println("Got contour with width=" + width);
-	        }
-	    
-	}
+//	public void runGRIP(){
+//	        /* Run GRIP in a new process */
+//	        try {
+//	            new ProcessBuilder("/home/robotics2/grip").inheritIO().start();
+//	        } catch (IOException e) {
+//	            e.printStackTrace();
+//	        }
+//
+//	    	for (double width : grip.getNumberArray("targets/width", new double[0])) {
+//	            System.out.println("Got contour with width=" + width);
+//	        }
+//	    
+//	}
 	
     public void stop() {
     	shooterMotor.set(0);
@@ -140,17 +144,22 @@ public class Shooter extends Subsystem {
   //added two classes (isAtTop and isAtBottom) (Sunday CR AO)
     public void setAngle (Joystick stick){ 
     	double speed = stick.getY();
-    	//angleMotor.set(speed);
+    		angleMotor.set(speed);
+    		System.out.println("going:" + -1*pot.get());
+
     	if (speed < 0 && isAtBottom()){
+    	//	System.out.println("stopping bc out of limit/pot range" + pot.get());
     		stopAngle();
     	}
-    	
+//    	if ((speed != 0) && (isAtBottom() || (pot.get()>=50.0)||(pot.get()<=-14.0))){
+//    		System.out.println("stopping bc out of limit/pot range" + pot.get());
+//    		stopAngle();
+//    	}
     	else {
     		angleMotor.set(speed);
     	}
     }
    
-    
     public boolean isAtBottom() {
     	//return false;
     	return !bottomContact.get();

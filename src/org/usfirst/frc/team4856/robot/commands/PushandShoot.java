@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class PushandShoot extends Command {
-
     public PushandShoot() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
