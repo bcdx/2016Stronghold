@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team4856.robot;
 import edu.wpi.first.wpilibj.Relay;
 //import edu.wpi.first.wpilibj.buttons.Button;
@@ -30,8 +31,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 	//declares variables of Joystick type (i.e. lefStick is an instance of Joystick.)
 	//0, 1, and 2 refer to USB ports
-	//uses leftStick and rightStick for tank drive and elevatorStick to control the elevator
-	// public Joystick leftStick = new Joystick(0);
+	//uses  ic Joystick leftStick = new Joystick(0);
 	// public Joystick rightStick = new Joystick(1);
 	 public Joystick shooterStick = new Joystick(2); 
 

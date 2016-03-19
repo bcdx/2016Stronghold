@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import org.usfirst.frc.team4856.robot.subsystems.Shooter;
 import org.usfirst.frc.team4856.robot.subsystems.Scaler;
 import org.usfirst.frc.team4856.robot.commands.AutonomousMode;
+import org.usfirst.frc.team4856.robot.commands.AutonomousWithShoot;
 import org.usfirst.frc.team4856.robot.subsystems.Pusher;
 
 /**
@@ -41,10 +42,10 @@ public class Robot extends IterativeRobot {
 	public static Pusher pusher;
 	public static Scaler scaler;
 	
-	CANTalon left1= new CANTalon(0);
-	CANTalon left2= new CANTalon(1);
-	CANTalon right1= new CANTalon(2);
-	CANTalon right2= new CANTalon(3);
+	public static CANTalon left1= new CANTalon(0);
+	public static CANTalon left2= new CANTalon(1);
+	public static CANTalon right1= new CANTalon(2);
+	public static CANTalon right2= new CANTalon(3);
 
 	Joystick leftstick = new Joystick(0);
 	Joystick rightstick = new Joystick(1);
@@ -52,16 +53,11 @@ public class Robot extends IterativeRobot {
 
 
 	public static Command autonomousCommand;
-
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     
-    public Robot (){
-    	table=NetworkTable.getTable("Root/GRIP/myContoursReport");
-    	
-    }
     
     
     public void robotInit() {
@@ -70,12 +66,15 @@ public class Robot extends IterativeRobot {
 		scaler = new Scaler();
 		oi = new OI();
 		autonomousCommand = new AutonomousMode(); 
-		double[] defaultValue = new double[0];
-////		while (true) {
-////			
-		System.out.println("starting robotInit");
-			double[] widths = table.getNumberArray("width", defaultValue);
-			System.out.println("width table created" + widths.length);
+        left2.changeControlMode(CANTalon.TalonControlMode.Follower);
+        right2.changeControlMode(CANTalon.TalonControlMode.Follower);
+
+		//		double[] defaultValue = new double[0];
+//////		while (true) {
+//////			
+//		System.out.println("starting robotInit");
+//			double[] widths = table.getNumberArray("width", defaultValue);
+//			System.out.println("width table created" + widths.length);
 //			for (double width : widths) {
 //				System.out.println("width: "+ width);
 //			}
@@ -107,7 +106,8 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
     	//if (the autonomousCommand does not return a null set (is not teleop), then run the autonomousCommand
-    	  autonomousCommand.start();
+    	 
+    	 autonomousCommand.start();
     }
 
     @Override //newer GRIP code
